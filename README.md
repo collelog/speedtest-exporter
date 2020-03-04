@@ -1,6 +1,6 @@
 # speedtest-exporter
 
-> インターネット接続スピードテストのPrometheus exporterのDockerコンテナ
+> インターネット接続スピードテスト Prometheus exporter Dockerコンテナ
   
 [Speedtest.net](https://www.speedtest.net/) による計測結果を収集します。
 
