@@ -1,7 +1,7 @@
 FROM alpine:3.11
 LABEL maintainer "collelog <collelog.cavamin@gmail.com>"
 
-EXPOSE 9104
+EXPOSE 9101
 
 WORKDIR /usr/local/
 

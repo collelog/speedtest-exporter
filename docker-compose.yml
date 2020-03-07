@@ -9,7 +9,7 @@ services:
         networks:
             - default
         ports:
-            - 9104
+            - 9101
         volumes:
             - /etc/localtime:/etc/localtime:ro
         labels:
