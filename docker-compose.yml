@@ -8,8 +8,8 @@ services:
         image: collelog/speedtest-exporter-alpine3.11
         networks:
             - default
-        ports:
-            - 9101
+        expose:
+            - 9683
         volumes:
             - /etc/localtime:/etc/localtime:ro
         labels:
