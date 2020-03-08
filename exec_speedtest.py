@@ -28,36 +28,36 @@ from prometheus_client import start_http_server, Summary, Gauge
 #30230) Lequios (Naha City, Japan)
 servers = [14623]
 
-test_interval = 600 # initiate speed test every 600 seconds
+status_interval = 600 # initiate speed test every 600 seconds
 
-speedtest_upload = Gauge('speedtest_upload_speed', 'upload bandwidth in (bit/s)')
-speedtest_download = Gauge('speedtest_download_speed', 'download bandwidth in (bit/s)')
-speedtest_upload_bytes= Gauge('speedtest_upload_bytes', 'upload usage capacity (bytes)')
-speedtest_download_bytes = Gauge('speedtest_download_bytes', 'download usage capacity (bytes)')
-speedtest_ping = Gauge('speedtest_ping', 'icmp latency (ms)')
+status_upload = Gauge('speedtest_upload_speed', 'upload bandwidth in (bit/s)')
+status_download = Gauge('speedtest_download_speed', 'download bandwidth in (bit/s)')
+status_upload_bytes= Gauge('speedtest_upload_bytes', 'upload usage capacity (bytes)')
+status_download_bytes = Gauge('speedtest_download_bytes', 'download usage capacity (bytes)')
+status_ping = Gauge('speedtest_ping', 'icmp latency (ms)')
 
 def process_request(t):
 
-    stester = speedtest.Speedtest()
-    stester.get_servers(servers)
-    stester.get_best_server()
+    target = speedtest.Speedtest()
+    target.get_servers(servers)
+    target.get_best_server()
 
-    stester.upload()
-    stester.download()
+    target.upload()
+    target.download()
 
-    results_dict = stester.results.dict()
+    res_dict = target.results.dict()
 
-    speedtest_upload.set(results_dict["upload"])
-    speedtest_download.set(results_dict["download"])
-    speedtest_upload_bytes.set(results_dict["bytes_sent"])
-    speedtest_download_bytes.set(results_dict["bytes_received"])
-    speedtest_ping.set(results_dict["ping"])
+    status_upload.set(res_dict['upload'])
+    status_download.set(res_dict['download'])
+    status_upload_bytes.set(res_dict['bytes_sent'])
+    status_download_bytes.set(res_dict['bytes_received'])
+    status_ping.set(res_dict['ping'])
 
-    print("upload: %s" % (results_dict["upload"]))
-    print("download: %s" % (results_dict["download"]))
-    print("upload_bytes: %s" % (results_dict["bytes_sent"]))
-    print("download_bytes: %s" % (results_dict["bytes_received"]))
-    print("ping: %s" % (results_dict["ping"]))
+    print('upload: %s' % (res_dict['upload']))
+    print('download: %s' % (res_dict['download']))
+    print('upload_bytes: %s' % (res_dict['bytes_sent']))
+    print('download_bytes: %s' % (res_dict['bytes_received']))
+    print('ping: %s' % (res_dict['ping']))
 
     time.sleep(t)
 
@@ -67,8 +67,8 @@ if __name__ == '__main__':
     # Generate some requests.
     while True:
         try:
-            process_request(test_interval)
+            process_request(status_interval)
         except TypeError:
-            print("TypeError returned from speedtest server")
+            print('TypeError returned from speedtest server')
         except socket.timeout:
-            print("socket.timeout returned from speedtest server")
+            print('socket.timeout returned from speedtest server')
