@@ -24,6 +24,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
+      "decimals": 0,
       "description": "speed test",
       "fill": 1,
       "fillGradient": 0,
@@ -36,7 +37,7 @@
       "hiddenSeries": false,
       "id": 1,
       "legend": {
-        "avg": false,
+        "avg": true,
         "current": false,
         "max": true,
         "min": true,
@@ -182,5 +183,6 @@
   },
   "timezone": "",
   "title": "Speed Test",
+  "uid": null,
   "version": 1
 }
